@@ -66,8 +66,13 @@ class HomePage extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Populares', style: Theme.of(context).textTheme.subtitle1,),
+          Container(
+            padding: EdgeInsets.only(left: 20.0),
+            child: Text('Populares', style: Theme.of(context).textTheme.subtitle1,)
+          ),
+          SizedBox(height: 5.0,),
           FutureBuilder(
             future: peliculasProvider.getPopular(),
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
@@ -80,7 +85,7 @@ class HomePage extends StatelessWidget {
               }
               else
               {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }
               
             },
