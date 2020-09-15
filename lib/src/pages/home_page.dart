@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:peliculas_flutter/src/components/card_swiper_widget.dart';
 import 'package:peliculas_flutter/src/components/movie_horizontal.dart';
 import 'package:peliculas_flutter/src/providers/peliculas_provider.dart';
+import 'package:peliculas_flutter/src/serach/search_delegate.dart';
 
 class HomePage extends StatelessWidget {
   PeliculasProvider peliculasProvider = new PeliculasProvider();
@@ -17,7 +18,13 @@ class HomePage extends StatelessWidget {
             title: Text('Peliculas en cines'),
             backgroundColor: Colors.indigoAccent,
             actions: <Widget>[
-              IconButton(icon: Icon(Icons.search), onPressed: () {})
+              IconButton(
+                icon: Icon(Icons.search), 
+                onPressed: () 
+                {
+                  showSearch(context: context, delegate: DataSeach());
+                }
+              )
             ],
           ),
           body: Container(
@@ -64,8 +71,6 @@ class HomePage extends StatelessWidget {
           StreamBuilder(
             stream: peliculasProvider.popularesStream,
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-              snapshot.data?.forEach((element) => print(element.title));
-
               if (snapshot.hasData) {
                 return MovieHorizontal(peliculas: snapshot.data,  siguientepagina: peliculasProvider.getPopular);
               } else {
