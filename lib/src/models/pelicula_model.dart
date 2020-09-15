@@ -82,6 +82,17 @@ class Pelicula {
     return 'https://image.tmdb.org/t/p/w500/$posterPath';
   }
 
+  getBackgroundImg()
+  {
+
+    if(posterPath == null)
+    {
+      return 'http://via.placeholder.com/350x150';
+    }
+
+    return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+  }
+
 }
 
 enum OriginalLanguage { EN, KO, ES }
